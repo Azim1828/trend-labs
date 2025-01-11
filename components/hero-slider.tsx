@@ -20,15 +20,16 @@ const slides: Slide[] = [
   },
   {
     image: "/slideshow1-2.jpg",
-    title: "70% off to everything",
-    description: "Winter Collection Sale",
+    title: "50% off on accessories",
+    description: "Exclusive Accessories Sale",
   },
   {
     image: "/slideshow1-3.jpg",
-    title: "70% off to everything",
-    description: "Winter Collection Sale",
+    title: "30% off on new arrivals",
+    description: "Latest Trends Discount",
   },
 ];
+
 
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
