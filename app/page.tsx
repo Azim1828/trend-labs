@@ -1,5 +1,6 @@
-import { CTANewsletter } from "@/components/cta-newsletter";
+// import { CTANewsletter } from "@/components/cta-newsletter";
 import { CTASale } from "@/components/cta-sale";
+import FashionHero from "@/components/fashion-hero";
 import { Features } from "@/components/features";
 import HeroSlider from "@/components/hero-slider";
 import { NewArrivals } from "@/components/new-arrivals";
@@ -13,10 +14,11 @@ export default function Home() {
       <Features />
       <CTASale />
       <NewArrivals />
+      <FashionHero />
       <PromotionalBanner />
       <TabbedProducts />
-      <CTANewsletter />
-     
+
+      {/* <CTANewsletter /> */}
     </main>
   );
 }

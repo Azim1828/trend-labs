@@ -1,10 +1,6 @@
-'use client'
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Search, ShoppingBag, User, Menu, X, LogOut, UserCircle, Heart } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import { useAuth } from "@/contexts/auth-context"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,34 +8,47 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useRouter } from "next/navigation"
-import { useShop } from "@/contexts/shop-context"
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/contexts/auth-context";
+import { useShop } from "@/contexts/shop-context";
+import {
+  Heart,
+  LogOut,
+  Menu,
+  Search,
+  ShoppingBag,
+  User,
+  UserCircle,
+  X,
+} from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
   { href: "/account", label: "Account" },
   { href: "/contact", label: "Contact Us" },
-]
+];
 
 export function SiteHeader() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const { user, logout } = useAuth()
-  const router = useRouter()
-  const { cartCount, favorites } = useShop()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const router = useRouter();
+  const { cartCount, favorites } = useShop();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
       <div className="container px-4 mx-auto">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="text-xl font-bold tracking-tight hover:text-red-600 transition-colors"
           >
-            ADRIAN.
+            Trend Labs
           </Link>
 
           {/* Desktop Navigation */}
@@ -53,7 +62,6 @@ export function SiteHeader() {
                 {link.label}
               </Link>
             ))}
-            
           </nav>
 
           {/* Actions */}
@@ -102,25 +110,31 @@ export function SiteHeader() {
                   <>
                     <DropdownMenuLabel>
                       <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">{user.name || 'User'}</p>
-                        <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                        <p className="text-sm font-medium leading-none">
+                          {user.name || "User"}
+                        </p>
+                        <p className="text-xs leading-none text-muted-foreground">
+                          {user.email}
+                        </p>
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => router.push('/account')}>
+                    <DropdownMenuItem onClick={() => router.push("/account")}>
                       <UserCircle className="mr-2 h-4 w-4" />
                       <span>Account</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => {
-                      logout()
-                      router.push('/auth')
-                    }}>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        logout();
+                        router.push("/auth");
+                      }}
+                    >
                       <LogOut className="mr-2 h-4 w-4" />
                       <span>Log out</span>
                     </DropdownMenuItem>
                   </>
                 ) : (
-                  <DropdownMenuItem onClick={() => router.push('/auth')}>
+                  <DropdownMenuItem onClick={() => router.push("/auth")}>
                     <User className="mr-2 h-4 w-4" />
                     <span>Sign in</span>
                   </DropdownMenuItem>
@@ -146,9 +160,11 @@ export function SiteHeader() {
         </div>
 
         {/* Search Bar */}
-        <div className={`overflow-hidden transition-all duration-300 ${
-          isSearchOpen ? 'h-16' : 'h-0'
-        }`}>
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            isSearchOpen ? "h-16" : "h-0"
+          }`}
+        >
           <div className="container py-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
@@ -162,9 +178,11 @@ export function SiteHeader() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-300 ${
-          isMenuOpen ? 'max-h-screen' : 'max-h-0'
-        }`}>
+        <div
+          className={`lg:hidden overflow-hidden transition-all duration-300 ${
+            isMenuOpen ? "max-h-screen" : "max-h-0"
+          }`}
+        >
           <nav className="flex flex-col space-y-4 py-4">
             {navLinks.map((link) => (
               <Link
@@ -180,5 +198,5 @@ export function SiteHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }

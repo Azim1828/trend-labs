@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
 
 interface Slide {
   image: string;
@@ -14,28 +14,26 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    image: "/slideshow1-1.jpg",
+    image: "/slider.webp",
     title: "70% off to everything",
     description: "Winter Collection Sale",
   },
   {
-    image: "/slideshow1-2.jpg",
+    image: "/slider_01.webp",
     title: "50% off on accessories",
     description: "Exclusive Accessories Sale",
   },
   {
-    image: "/slideshow1-3.jpg",
+    image: "/slider_02.webp",
     title: "30% off on new arrivals",
     description: "Latest Trends Discount",
   },
 ];
 
-
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Auto-advance slides
   const nextSlide = useCallback(() => {
     if (!isAnimating) {
       setIsAnimating(true);
@@ -43,14 +41,6 @@ export default function HeroSlider() {
       setTimeout(() => setIsAnimating(false), 500);
     }
   }, [isAnimating]);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, [nextSlide]);
 
   const prevSlide = () => {
     if (!isAnimating) {
@@ -60,19 +50,55 @@ export default function HeroSlider() {
     }
   };
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
   return (
-    <div className="relative h-[89vh] w-full overflow-hidden">
+    <div
+      className="relative h-screen w-full overflow-hidden"
+      aria-live="polite"
+    >
       {/* Background Image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 transition-opacity duration-700">
         <Image
           src={slides[currentSlide].image}
-          alt="Background"
+          alt={slides[currentSlide].title}
           fill
-          className="object-cover transition-opacity duration-500 ease-in-out"
+          className="object-cover"
           priority
         />
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-l from-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+      </div>
+
+      {/* Slide Content */}
+      <div
+        className={`absolute inset-0 flex flex-col justify-center items-${
+          currentSlide === 1 ? "end" : "start"
+        } px-6 md:px-16`}
+      >
+        <div
+          className={`max-w-lg text-${currentSlide === 1 ? "right" : "left"}`}
+        >
+          <p className="text-lg text-white/80 mb-2 animate-fadeIn">
+            {slides[currentSlide].description}
+          </p>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-slideUp">
+            {slides[currentSlide].title}
+          </h1>
+          <Link href="/shop" passHref>
+            <Button
+              size="lg"
+              className="bg-red-600 hover:bg-white text-white hover:text-red-600 transition-all duration-300 border border-red-600"
+            >
+              Shop Now
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Navigation Buttons */}
@@ -80,50 +106,34 @@ export default function HeroSlider() {
         <Button
           variant="ghost"
           size="icon"
-          className="z-10 h-12 w-12 rounded-full bg-white/10 backdrop-blur-sm  transition-all hover:bg-red-600"
+          aria-label="Previous slide"
+          className="h-12 w-12 bg-white/20 text-white rounded-full backdrop-blur-md hover:bg-red-600"
           onClick={prevSlide}
         >
-          <ChevronLeft className="h-6 w-6 text-white" />
-          <span className="sr-only">Previous slide</span>
+          <ChevronLeft className="h-6 w-6" />
         </Button>
-
-        {/* Content */}
-        <div className="absolute inset-0 flex items-center justify-end px-8 md:px-16">
-          <div className="max-w-xl text-right">
-            <p className="text-lg font-medium text-white/80 mb-4 animate-fadeIn">
-              {slides[currentSlide].description}
-            </p>
-            <h1 className="text-5xl font-bold tracking-tight text-white lg:text-7xl mb-8 animate-slideUp">
-              {slides[currentSlide].title}
-            </h1>
-            <Button
-              size="lg"
-              className="border-2 border-red-600 hover:bg-white hover:text-red-600 bg-red-600 text-white transition-all duration-300 animate-fadeIn"
-            >
-              <Link href="/shop">Shop Now</Link>
-            </Button>
-          </div>
-        </div>
-
         <Button
           variant="ghost"
           size="icon"
-          className="z-10 h-12 w-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-red-600 transition-all"
+          aria-label="Next slide"
+          className="h-12 w-12 bg-white/20 text-white rounded-full backdrop-blur-md hover:bg-red-600"
           onClick={nextSlide}
         >
-          <ChevronRight className="h-6 w-6 text-white" />
-          <span className="sr-only">Next slide</span>
+          <ChevronRight className="h-6 w-6" />
         </Button>
       </div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
         {slides.map((_, index) => (
           <button
             key={index}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              currentSlide === index ? "w-8 bg-white" : "w-2 bg-white/50"
+            className={`h-3 w-3 rounded-full transition-all ${
+              currentSlide === index
+                ? "bg-white scale-125"
+                : "bg-white/50 hover:bg-white"
             }`}
+            aria-label={`Go to slide ${index + 1}`}
             onClick={() => setCurrentSlide(index)}
           />
         ))}
