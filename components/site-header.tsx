@@ -48,7 +48,7 @@ export function SiteHeader() {
             href="/"
             className="text-xl font-bold tracking-tight hover:text-red-600 transition-colors"
           >
-            Trend Labs
+            GUANG ZHOU NI LUO SHANG MAO YOU XIAN GONG SI
           </Link>
 
           {/* Desktop Navigation */}

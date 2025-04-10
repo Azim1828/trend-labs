@@ -11,6 +11,7 @@ import {
   MapPin,
   Phone,
   Twitter,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -61,33 +62,56 @@ export function SiteFooter() {
       </div>
 
       <div className="container mx-auto py-12">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Contact Information */}
-          <Card className="p-6 shadow-sm">
+
+          <Card className="p-6 shadow-sm lg:col-span-2">
             <h3 className="mb-4 text-lg font-semibold">Get In Touch With Us</h3>
             <div className="space-y-4 text-sm">
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-[#FF6B6B]" />
-                <p>+86 16235797392</p>
+                <p>+86 17081679328</p>
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin className="h-4 w-4 text-[#FF6B6B]" />
-                <p className="font-medium">
-                  DongKouXianShiJiangZhen, BoBingCunShiQiaoZu4Hao, HuNanSheng,
-                  422300, China
-                </p>
+                <div className="font-medium text-sm space-y-1">
+                  <p>
+                    No. 10, Xintang Road, Chengfeng Village, Licheng Street,
+                    Zengcheng District, Guangzhou City, Guangdong Province,
+                    510000, China
+                  </p>
+                  <p className="text-gray-600">
+                    广州市增城区荔城街道城丰村新汤路10号, 广州市, 广东省, 510000
+                  </p>
+                </div>
               </div>
+
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-[#FF6B6B]" />
-                <p>daeed5@outlook.com</p>
+                <p>f4903a@outlook.com</p>
+              </div>
+              <div className="flex items-center space-x-3">
+                <User className="h-4 w-4 text-[#FF6B6B]" />
+                <p>
+                  Contact Person: <span>liu hao (昊 刘)</span>
+                </p>
               </div>
               <div className="flex items-center space-x-3">
                 <Clock className="h-4 w-4 text-[#FF6B6B]" />
                 <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
               </div>
+              <div className="pt-6 space-y-2">
+                <h3 className="text-lg font-semibold">Business Name</h3>
+                <p className="text-muted-foreground">广州腻泺商贸有限公司</p>
+                <p className="text-muted-foreground">
+                  GUANG ZHOU NI LUO SHANG MAO YOU XIAN GONG SI
+                </p>
+                <p className="text-muted-foreground font-medium">
+                  Registration Number: 91440118MADETC899H
+                </p>
+              </div>
             </div>
           </Card>
-
           {/* Information */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -129,7 +153,6 @@ export function SiteFooter() {
               ))}
             </ul>
           </div>
-
           {/* Shop Departments */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -171,7 +194,6 @@ export function SiteFooter() {
               ))}
             </ul>
           </div>
-
           {/* Working Hours & Support */}
           <Card className="p-6 shadow-sm">
             <h3 className="mb-4 text-lg font-semibold">

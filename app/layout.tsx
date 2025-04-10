@@ -1,11 +1,11 @@
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { Toaster } from "@/components/ui/toaster";
+import { AuthProvider } from "@/contexts/auth-context";
+import { ShopProvider } from "@/contexts/shop-context";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { SiteHeader } from "@/components/site-header";
-import { AuthProvider } from "@/contexts/auth-context";
-import { Toaster } from "@/components/ui/toaster";
-import { SiteFooter } from "@/components/site-footer";
-import { ShopProvider } from "@/contexts/shop-context";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,8 +19,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Trend Labs's Store",
-  description: "Trend Labs's Store",
+  title: "GUANG ZHOU NI LUO SHANG MAO YOU XIAN GONG SI Store",
+  description: "GUANG ZHOU NI LUO SHANG MAO YOU XIAN GONG SI Store",
 };
 
 export default function RootLayout({
